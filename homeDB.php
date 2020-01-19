@@ -2,7 +2,7 @@
 
   include 'inc/connect.php';
 
-  $results_per_page = 3;
+  $results_per_page = 5;
   if (!isset($_GET['page'])) {
     $_GET['page'] = 1;
     $start = 0;

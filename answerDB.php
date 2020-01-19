@@ -12,7 +12,6 @@ if (isset($_POST['answer'])) {
   if ($runQueryAnswer) {
     echo "<script>window.open('des_ques.php?id=$qId', '_self')</script>";
   } else {
-    $_SESSION['err'] = "Error: " . mysqli_error($con);
   }
 }
 

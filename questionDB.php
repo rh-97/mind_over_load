@@ -12,8 +12,8 @@ if (isset($_POST['ask'])) {
     $imgDir = 'uploaded_images/';
     $targetFile = $imgDir . basename($_FILES['image']['name']);
     $i = 1;
+    $split = explode(".", $targetFile);
     while (file_exists($targetFile)) {
-      $split = explode(".", $targetFile);
       $targetFile = $split[0] . $i . "." . $split[1];
       $i++;
     }
@@ -29,10 +29,8 @@ if (isset($_POST['ask'])) {
 
   if ($run) {
     echo "<script>alert('$firstName, your question has been sccessfully posted!!!')</script>";
-    header("Location: timeline.php");
-  } else {
-    $_SESSION['err'] = "Error: " . mysqli_error($con);
-  }
+    echo "<script>window.open('timeline.php', '_self')</script>";
+  } 
 }
 
 

@@ -19,16 +19,7 @@
   <body>
     <?php include 'navbar.php'; ?><br>
 
-    <?php if (isset($_POST['err'])) { ?>
-      <div class="jumbotron">
-        <div class="container">
-          <?php
-            echo $_SESSION['err'];
-            unset($_SESSION['err']);
-           ?>
-        </div>
-      </div>
-    <?php } ?>
+
 
 
     <div class="container">

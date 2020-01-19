@@ -22,16 +22,7 @@
   <body>
     <?php include 'navbar.php'; ?><br><br>
 
-    <?php if (isset($_SESSION['err'])) { ?>
-      <div class="jumbotron">
-        <div class="container">
-          <?php
-            echo $_SESSION['err'];
-            unset($_SESSION['err']);
-           ?>
-        </div>
-      </div>
-    <?php } ?>
+
 
 
     <?php include 'homeDB.php' ?> <br>

@@ -10,6 +10,7 @@
 
 
     $result = mysqli_fetch_assoc($runQueryQuestion);
+    $id = $result['q_id'];
     $title = $result['q_title'];
     $description = $result['q_description'];
     $imagePath = $result['image'];
@@ -21,6 +22,7 @@
     if ($runQueryUser) {
       $result_ = mysqli_fetch_assoc($runQueryUser);
       $writer = $result_['first_name'] . " " . $result_['last_name'];
+      $time = $result['time'];
     }
 
     $queryAnswers = "select first_name, last_name, ans_body, time from user_info, answers where user_info.email=answers.email and answers.q_id=$qId";

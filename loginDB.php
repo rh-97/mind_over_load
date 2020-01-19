@@ -5,6 +5,7 @@ include 'inc/connect.php';
 if (isset($_POST['login'])) {
   $email = htmlentities(mysqli_escape_string($con, $_POST['email']));
   $passWord = htmlentities(mysqli_escape_string($con, $_POST['password']));
+  $passWord = md5($passWord);
 
   $login = "select * from user_info where email = '$email' and password = '$passWord'";
 
@@ -21,7 +22,9 @@ if (isset($_POST['login'])) {
     echo "<script>alert('$firstName, you have logged into MindOverLoad!!!')</script>";
     echo "<script>window.open('home.php', '_self')</script>";
   } else {
-    $_SESSION['err'] = "Error: " . mysqli_error($con);
+    echo "<script>alert('Your email and/or password were wrong.!!!')</script>";
+    #$_SESSION['err'] = "Error: " . mysqli_error($con);
+    echo "<script>window.open('login.php', '_self')</script>";
   }
 }
 

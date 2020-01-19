@@ -22,16 +22,6 @@
   <body>
     <?php include 'navbar.php'; ?><br><br>
 
-    <?php if (isset($_POST['err'])) { ?>
-      <div class="jumbotron">
-        <div class="container">
-          <?php
-            echo $_SESSION['err'];
-            unset($_SESSION['err']);
-           ?>
-        </div>
-      </div>
-    <?php } ?>
 
     <?php
       include 'des_quesDB.php';
@@ -51,6 +41,7 @@
                 <div class="col-12">
                   <p class="h3"> <?php echo $title; ?> </p>
                   <p class="h6">By <?php echo $writer; ?> </p>
+                  <p class="h6"> <?php echo $time; ?> </p>
                 </div>
               </div>
               <br><br>
@@ -60,6 +51,15 @@
                   <p class="h6"> <?php echo $description; ?> </p>
                 </div>
               </div><hr>
+              <br>
+              <div class="row justify-content-center">
+                <div class="col-12">
+                  <?php if ($writer==$_SESSION['fn']." ".$_SESSION['ln']) { ?>
+                      <button onclick="location.href='edit.php?id=<?=$id?>'" class="btn btn-primary">Edit</button>&nbsp
+                      <button onclick="location.href='edel.php?id=<?=$id?>&op=del&path=<?=$imagePath?>'" class="btn btn-danger" name="delete">Delete</button>&nbsp
+                  <?php } ?>
+                </div>
+              </div>
               <br><br>
               <div class="row justify-content-center">
                 <div class="col-12">
@@ -82,6 +82,24 @@
               <div class="jumbotron border">
                 <div class="container">
 
+                  <?php
+                          include 'inc/connect.php';
+
+                          $email = $_SESSION['email'];
+                          $queryProfile = "select status from user_info where email='$email'";
+                          $runQueryProfile = mysqli_query($con, $queryProfile);
+                          $result = mysqli_fetch_assoc($runQueryProfile);
+
+                   if ($result['status']!='verified') { ?>
+                        <div class="container">
+                          <div class="alert alert-danger">
+                            <?php
+                              echo "Please verify your account to give an answer. A link was sent to your email.";
+                             ?>
+                          </div>
+                        </div>
+
+                  <?php } else { ?>
                   <div class="row justify-content-center">
                       <h4><i>Give Your Solution!!!</i></h4>
                   </div>
@@ -104,7 +122,7 @@
                     </div>
                     <?php include 'answerDB.php'; ?>
                   </div><br>
-
+                <?php } ?>
                   <div class="row justify-content-center">
                     <div class="col-12">
 
